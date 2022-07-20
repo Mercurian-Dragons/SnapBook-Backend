@@ -22,7 +22,7 @@ const Search = ({searchParams}) => {
         .then(responsed => responsed.json())
         .then(responsed => {
             console.log(searchFeature)
-            fetch(`${searchOptions.geoApi}radius?radius=100000&lon=${responsed.lon}&lat=${responsed.lat}&kinds=tourist_facilities%2Cinteresting_places&rate=3&limit=50&apikey=${searchOptions.key}`)
+            fetch(`${searchOptions.geoApi}radius?radius=100000&lon=${responsed.lon}&lat=${responsed.lat}&kinds=tourist_facilities%2Cinteresting_places&rate=3&limit=5&apikey=${searchOptions.key}`)
             .then(response => response.json())
             .then(response => {
                 console.log(response)

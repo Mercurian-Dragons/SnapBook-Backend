@@ -2,6 +2,7 @@ import './App.css';
 import Home from './components/Home';
 import { Routes, Route, Link, Navigate } from 'react-router-dom'
 import Planner from './components/Planner';
+import {GiPalmTree}  from 'react-icons/gi';
 
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
     <div>
             <nav>
                 <Link to="/">
-            <h1>CT Planner</h1>
+            <h1>CT Planner <GiPalmTree/></h1>
                 </Link>
                 <Link to="./Planner.js">Planner</Link>
             </nav>

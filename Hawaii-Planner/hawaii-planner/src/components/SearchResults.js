@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link } from "react-router-dom"
+import Description from './Description';
 
 const SearchResults = ({features}) => {
-    console.log(features)
+    // console.log(features)
     if(!features){
         return <h2>Nothing Found</h2>
     }
@@ -11,9 +13,8 @@ const SearchResults = ({features}) => {
             <ul>
             {features.map(feature =>(
                 
-                        <li key={feature.id}>
-                            {feature.properties.name}
-                        </li>
+                <Description feature={feature}/>
+                        
             
             ))}
             </ul>

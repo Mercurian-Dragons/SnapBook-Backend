@@ -13,7 +13,6 @@ const Search = ({searchParams}) => {
     // https://api.opentripmap.com/0.1/en/places/geoname?name=waikiki&apikey=5ae2e3f221c38a28845f05b6d319b5c427c6d4a4e31557ddd057abee
 
     useEffect(() => {
-        getPlaces(searchFeature)
     }, [])
 
     function getPlaces(searchFeature){
@@ -42,6 +41,7 @@ const Search = ({searchParams}) => {
         event.preventDefault()
         getPlaces(searchFeature)
         console.log(searchFeature)
+        setSearchCity('')
 
     }
 

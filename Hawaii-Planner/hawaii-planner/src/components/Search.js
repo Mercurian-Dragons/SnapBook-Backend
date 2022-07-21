@@ -7,10 +7,8 @@ const Search = ({searchParams}) => {
     const [searchFeature, setSearchCity] = useState('honolulu')
     const searchOptions ={
         key: process.env.REACT_APP_CTPLANNER_KEY,
-        // api: 'https://api.opentripmap.com/0.1/en/places/radius?radius=100000&lon=-157.834549&lat=21.276218&kinds=tourist_facilities%2Cinteresting_places&rate=2&apikey='
         geoApi: 'https://api.opentripmap.com/0.1/en/places/'
     }
-    // https://api.opentripmap.com/0.1/en/places/geoname?name=waikiki&apikey=5ae2e3f221c38a28845f05b6d319b5c427c6d4a4e31557ddd057abee
 
     useEffect(() => {
     }, [])
@@ -47,11 +45,11 @@ const Search = ({searchParams}) => {
 
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className='searchBar'>
+            <form onSubmit={handleSubmit} className='searchForm'>
                 <label htmlFor='searchCity'>Search City </label>
-                <input type="text" id="searchCity" name="searchCity" placeholder='Search' required onChange={handleChange} value={searchFeature}/>
-                <button type="submit">Search</button>
+                <input className='searchInput' type="text" id="searchCity" name="searchCity" placeholder='City' required onChange={handleChange} value={searchFeature}/>
+                <button className='searchButton' type="submit">Search</button>
         </form>
         {features&&<SearchResults features={features}/>}
         </div>

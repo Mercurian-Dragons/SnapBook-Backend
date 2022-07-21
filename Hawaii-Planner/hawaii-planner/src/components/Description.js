@@ -3,9 +3,12 @@ import React, { useEffect, useState } from 'react';
 const Description = ({feature}) => {
     const [data, setData]= useState('')
     const [info, setInfo]= useState(false)
+    const searchOptions ={
+        key: process.env.REACT_APP_CTPLANNER_KEY,
+    }
     useEffect(()=> {
         console.log(feature.properties.xid)
-        fetch(`https://api.opentripmap.com/0.1/en/places/xid/${feature.properties.xid}?apikey=5ae2e3f221c38a28845f05b6de1ff5ec50db48a4b53886e12e88117a`)
+        fetch(`https://api.opentripmap.com/0.1/en/places/xid/${feature.properties.xid}?apikey=${searchOptions.key}`)
         .then(res => res.json())
         .then(res => setData(res))
         console.log(data)
@@ -20,12 +23,12 @@ const Description = ({feature}) => {
         
         <>
 
-            <div>
+            <div className='button'>
             <button onClick={()=> setInfo(!info)}>{data.name}</button>
             </div>
             {info ? (
             <div id="showDiv">
-            <img src={data.preview.source} alt={data.name} height={200} width={200}/>
+            <img src={data.preview.source} alt={data.name}/>
             <p>{data.wikipedia_extracts.text}</p>
             </div>
             )

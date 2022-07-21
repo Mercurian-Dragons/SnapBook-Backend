@@ -1,53 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
 html,
 body {
+  font-family: 'Ubuntu', sans-serif;
   margin: 0;
   padding: 0;
   font-size: 14pt;
   width: 100vw;
   height: 100vh;
+  background-color: #F0EBD8;
 }
 
 nav {
-  background: rgb(190, 46, 46);
+  background: #59A5D8;
   color: white;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
+  width: 100%;
 }
 
-nav img {
-  max-height: 50px;
-  padding: 5px;
-  /* margin: 5px 20px 5px 0; */
-  display: inline-block;
-  vertical-align: middle;
-}
-
-nav h1 {
-  margin: 0;
-  display: inline-block;
-  vertical-align: middle;
-}
 
 nav a {
   color: white;
-  display: inline-block;
   padding: 20px;
   font-size: 1.2em;
   text-decoration: none;
 }
 
-nav a:hover {
-  background: #282c34;
-}
-
 main {
-  width: 900px;
+  width: 100%;
   margin: auto;
   height: 100%;
 }
 
-.showid{
-  visibility: hidden;
+
+.searchForm{
+  width:100%;
+  max-width:300px;
+  display: inline-flex;
+}
+.searchInput{
+  flex-grow:1;
+  padding: 10px;
+  outline: none;
+  border: 1px solid #59A5D8;
+  border-radius: 5px 0 0 5px;
+  background: #f8fafa;
+}
+
+img{
+  margin: auto;
+  max-height: 100%;
+  max-width: 100%;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+link{
+  position: absolute  ;
+}
+
+.itinerary{
+  margin:auto;
+  margin-right: 0;
+  float: right;
 }

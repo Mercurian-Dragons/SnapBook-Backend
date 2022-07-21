@@ -12,7 +12,7 @@ function App() {
                 <Link to="/">
             <h1>CT Planner <GiPalmTree/></h1>
                 </Link>
-                <Link to="./Planner.js">Planner</Link>
+                <Link to="./Planner.js" className='itinerary'>Itinerary</Link>
             </nav>
             <main>
                 <Routes>

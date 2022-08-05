@@ -2,12 +2,13 @@ const express = require('express')
 require('dotenv').config
 require('./db/connection')
 const app = express()
+const cors = require('cors')
 app.set('port', process.env.PORT || 8000)
 const mongoose = require('mongoose')
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
-
+app.use(cors())
 app.get('/', (req,res) => {
     res.redirect('/album')
 })

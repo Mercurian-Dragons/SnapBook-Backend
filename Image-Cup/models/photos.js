@@ -1,4 +1,5 @@
 const mongoose = require ('mongoose')
+const Album = require('./album')
 
 const PhotoSchema = new mongoose.Schema({
     id: Number,
@@ -16,6 +17,10 @@ const PhotoSchema = new mongoose.Schema({
         type: String,
         // required: true,
         // default: 'imgur.com'
+    },
+    albumId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Album',
     },
     // uploader: {
     //     type: mongoose.Schema.Types.ObjectId,

@@ -9,8 +9,12 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 app.get('/', (req,res) => {
-    res.redirect('/photo')
+    res.redirect('/album')
 })
+
+const albumController = require('./controllers/albumController')
+const Album = require('./models/album')
+app.use('/album', albumController)
 
 const photoController = require('./controllers/photoController')
 const Photo = require('./models/Photos')

@@ -1,6 +1,7 @@
-const mongoose = require ('mongoose')
+const mongoose = require('../db/connection')
+// const Album = require('./album')
 
-const PhotoSchema = new mongoose.Schema({
+const photoSchema = new mongoose.Schema({
     id: Number,
     filename: {
         type: String,
@@ -17,6 +18,10 @@ const PhotoSchema = new mongoose.Schema({
         // required: true,
         // default: 'imgur.com'
     },
+    // albumId: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'Album',
+    // },
     // uploader: {
     //     type: mongoose.Schema.Types.ObjectId,
     //     ref: 'User',
@@ -32,6 +37,4 @@ const PhotoSchema = new mongoose.Schema({
     }
 )
 
-const Photo = mongoose.model('Photo', PhotoSchema)
-
-module.exports = Photo
+module.exports = photoSchema

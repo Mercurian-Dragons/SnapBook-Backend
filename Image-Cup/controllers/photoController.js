@@ -1,6 +1,7 @@
 const express = require ('express')
 const router = express.Router()
-const Photo = require('../models/Photos')
+const Photo = require('../models/photos')
+const Album = require('../models/album')
 
 router.get('/', async (req,res, next) => {
     try{
@@ -22,8 +23,22 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req,res,next) => {
     try {
-        const newPhoto = await Photo.create(req.body)
-        res.status(201).json(newPhoto)
+        // get photo data from body of request
+        const photoData = req.body;
+        // get id of album from body of photo upload?
+        const albumId = photoData.albumId;
+        // find preexisting album by its id
+        Album.findById(albumId)
+            .then((album) => {
+                // add photo to album
+                album.photos.push(photoData);
+                // save album
+                return album.save();
+            })
+            // send response back to client
+            .then((photo) => res.status(201).json({album: Album}))
+        // const newPhoto = await Photo.create(req.body)
+        // res.status(201).json(newPhoto)
     } catch(err){
         next(err)
     }

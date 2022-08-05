@@ -22,6 +22,7 @@ const PhotoSchema = new mongoose.Schema({
     //     ref: 'User',
     //     required: true,
     // },
+    // deleted: true,
     fileType: String,
     // favorite: Boolean,
     // tags: [{}],

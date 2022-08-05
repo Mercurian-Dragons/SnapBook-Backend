@@ -1,4 +1,4 @@
-const mongoose = require ('mongoose')
+const mongoose = require('../db/connection')
 const PhotoSchema = require ('./photos')
 
 const AlbumSchema = new mongoose.Schema({

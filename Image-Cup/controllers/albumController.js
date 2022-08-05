@@ -16,14 +16,14 @@ router.get('/', async (req, res, next) => {
 
 // SHOW
 // GET /albums/:id
-// router.get('/:id', async (req, res, next) => {
-//     try{
-//         const id = req.params.id
-//         res.json(album)
-//     } catch(err){
-//         next(err)
-//     }
-// })
+router.get('/:id', async (req, res, next) => {
+    try{
+        const id = req.params.id
+        res.json(album)
+    } catch(err){
+        next(err)
+    }
+})
 
 // router.post('/', async (req,res,next) => {
 //     try {

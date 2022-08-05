@@ -2,15 +2,34 @@ const mongoose = require ('mongoose')
 
 const PhotoSchema = new mongoose.Schema({
     id: Number,
-    filename: String,
+    filename: {
+        type: String,
+        required: true,
+        default: 'My Photo',
+    },
     caption: String,
-    altText: String,
-    uploader: Object,
+    altText: {
+        type: String,
+        default: 'Photo',
+    },
+    url: {
+        type: String,
+        // required: true,
+        // default: 'imgur.com'
+    },
+    // uploader: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'User',
+    //     required: true,
+    // },
     fileType: String,
-    url: String,
-    timestamp: Date,
-
-})
+    // favorite: Boolean,
+    // tags: [{}],
+    },
+    {
+        timestamps: true,
+    }
+)
 
 const Photo = mongoose.model('Photo', PhotoSchema)
 

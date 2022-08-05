@@ -2,14 +2,31 @@ const mongoose = require ('mongoose')
 
 const AlbumSchema = new mongoose.Schema({
     id: Number,
-    filename: String,
-    caption: String,
-    altText: String,
-    uploader: Object,
-    fileType: String,
-    url: String,
-})
+    albumName:{
+        type: String,
+        required: true,
+        default: 'My Album'
+    },
+    description: String,
+    url: {
+        type: String,
+        // required: true,
+    },
+    photos: [],
+    creator: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        // required: true,
+    },
+    
+    // private: Boolean,
+    // tags: []
+    },
+    {
+        timestamps: true,
+    }
+)
 
 const Album = mongoose.model('Album', AlbumSchema)
 
-module.exports = Photo
+module.exports = Album

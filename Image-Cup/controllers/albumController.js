@@ -15,7 +15,7 @@ router.get('/', async (req, res, next) => {
 })
 
 // SHOW
-// GET /albums/:id
+// GET /album/:id
 // working
 router.get('/:id', (req, res, next) => {
 	const id = req.params.id;
@@ -35,7 +35,7 @@ router.post('/', (req, res, next) => {
 });
 
 // UPDATE
-// PATCH /albums/:id
+// PATCH /album/:id
 // working
 router.patch('/:id', (req, res, next) => {
 	const id = req.params.id;

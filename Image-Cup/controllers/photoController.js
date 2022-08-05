@@ -3,27 +3,53 @@ const router = express.Router()
 const Photo = require('../models/photos')
 const Album = require('../models/album')
 
-
-router.get('/', async (req,res, next) => {
-    try{
-        const photo = await Photo.find({})
-        res.json(photo)
-    } catch(err){
+// INDEX
+// GET /photo/
+// get all photos for an album
+router.get('/:albumId', async (req, res, next) => {
+    try {
+      // find the album first
+        const album = await Album.findById(
+        req.params.albumId
+        ).populate('photos')
+        if (album) {
+        // respond with all of the photos for that album
+        res.json(album.photos)
+        } else {
+        // if you can't find it, send a 404
+        res.sendStatus(404)
+    }
+    } catch (err) {
         next(err)
     }
 })
 
-// not working, needs testing
-// router.get('/:id', async (req, res, next) => {
-//     try{
-//         const photo = await Photo.findById(req.params.id)
-//         res.json(photo)
-//     } catch(err){
-//         next(err)
-//     }
-// })
+// SHOW
+// get one photo
+// GET /photo/:albumId/photoId
+router.get('/:albumId/:photoId', (req, res, next) => {
+    Album.findById(req.params.albumId)
+        .populate('photos')
+        .then((album) => {
+        if (album) {
+            const foundPhoto = album.photos.find(photo => photo._id.toString() === req.params.photoId)
 
-// working (most of the time)
+        if (foundPhoto) {
+            res.json(foundPhoto)
+        } else {
+            res.sendStatus(404)
+        }
+        } else {
+          // if you can't find it, send a 404
+        res.sendStatus(404)
+        }
+    })
+    .catch(next)
+})
+
+// CREATE
+// POST /photo/
+// localhost:8000/photo/albumID
 // posting a photo TO AN ALBUM
 router.post('/:albumId', (req, res, next) => {
     Album.findById(req.params.albumId)
@@ -40,38 +66,45 @@ router.post('/:albumId', (req, res, next) => {
     .catch(next)
 })
 
-// needs to be tested 
-// router.put('/:id', async (req,res,next) => {
-//     try{
-//         const updatedPhoto = await Photo.findByIdAndUpdate(req.params.id, req.body, {new:true})
-//         if(updatedPhoto){
-//             res.json(updatedPhoto)
-//         } else{
-//             res.sendStatus(404)
-//         }
-//     } catch(err){
-//         next(err)
-//     }
-// })
+// UPDATE
+// PATCH /photo
+// localhost:8000/photo/photoId
+router.patch('/:id', (req, res, next) => {
+    const id = req.params.id
+    const photoData = req.body
 
-// doesn't seem to be working 
+    Album.findOne({
+        'photos._id': id,
+    })
+        .then((album) => {
+            const review = album.photos.id(id)
+            review.set(photoData)
+            return album.save()
+        })
+        .then(() => res.sendStatus(204))
+        .catch(next)
+  })
+
+// DESTROY
+// DELETE: /photo
+// localhost:8000/photo/albumID/photoId
 router.delete('/:albumId/:photoId', (req, res, next) => {
     Album.findById(req.params.albumId)
-      .then((album) => {
+    .then((album) => {
         if (album) {
-          album.photos.id(req.params.photoId).remove();
-          album.save()
-          res.sendStatus(204)
+            album.photos.id(req.params.photoId).remove();
+            album.save()
+            res.sendStatus(204)
           // } else {
           //   res.sendStatus(404)
           // }
         } else {
           // if you can't find it, send a 404
-          res.sendStatus(404)
+            res.sendStatus(404)
         }
-      })
-      .catch(next)
-  })
+        })
+        .catch(next)
+})
 
 module.exports = router
 

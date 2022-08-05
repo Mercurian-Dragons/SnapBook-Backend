@@ -1,7 +1,7 @@
 const mongoose = require('../db/connection')
-const PhotoSchema = require ('./photos')
+const photoSchema = require ('../models/photos')
 
-const AlbumSchema = new mongoose.Schema({
+const albumSchema = new mongoose.Schema({
     id: Number,
     albumName:{
         type: String,
@@ -14,7 +14,7 @@ const AlbumSchema = new mongoose.Schema({
         // required: true,
         // needs to be e.g. localhost:8000/albums/:id
     },
-    photos: [PhotoSchema],
+    photos: [photoSchema],
     creator: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -29,6 +29,6 @@ const AlbumSchema = new mongoose.Schema({
     }
 )
 
-const Album = mongoose.model('Album', AlbumSchema)
+const Album = mongoose.model('Album', albumSchema)
 
 module.exports = Album

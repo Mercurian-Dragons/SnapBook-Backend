@@ -1,6 +1,5 @@
-// const mongoose = require ('mongoose')
 const mongoose = require('../db/connection')
-const Album = require('./album')
+// const Album = require('./album')
 
 const photoSchema = new mongoose.Schema({
     id: Number,
@@ -38,6 +37,4 @@ const photoSchema = new mongoose.Schema({
     }
 )
 
-// const Photo = mongoose.model('Photo', PhotoSchema)
-
-module.exports = photoSchema;
+module.exports = photoSchema

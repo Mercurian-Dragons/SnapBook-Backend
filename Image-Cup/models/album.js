@@ -19,7 +19,6 @@ const albumSchema = new mongoose.Schema({
     creator: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        // required: true,
     },
     
     // private: Boolean,

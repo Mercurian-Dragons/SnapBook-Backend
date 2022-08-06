@@ -9,6 +9,7 @@ const Album = require('../models/album')
 router.get('/albums', async (req, res, next) => {
     try {
         const albums = await Album.find({})
+		.populate('creator')
 		.populate('photos.creator')
 		// ^ displays actual name of the photo's creator, rather than only the ID
         res.json(albums)
@@ -26,6 +27,7 @@ router.get('/albums', async (req, res, next) => {
 router.get('/album/:id', (req, res, next) => {
 	const id = req.params.id;
 	Album.findById(id).populate('photos')
+	.populate('creator')
 	.populate('photos.creator')
 	// ^ displays actual name of the photo's creator, rather than only the ID
 		.then((album) => res.json(album))
@@ -51,6 +53,7 @@ router.patch('/album/edit/:id', (req, res, next) => {
 	const id = req.params.id;
 	const albumData = req.body;
 	Album.findOneAndUpdate({ _id: id }, albumData, { new: true })
+		.populate('creator')
 		.then((album) => res.json(album))
 		.catch(next);
 });
@@ -62,6 +65,7 @@ router.patch('/album/edit/:id', (req, res, next) => {
 router.delete('/album/edit/:id', (req, res, next) => {
 	const id = req.params.id;
 	Album.findOneAndDelete({ _id: id })
+	.populate('creator')
 		.then(() => res.sendStatus(204))
 		.catch(next);
 });

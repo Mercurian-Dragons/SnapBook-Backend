@@ -10,19 +10,15 @@ const photoSchema = new mongoose.Schema({
         default: 'My Photo',
     },
     description: String,
-    altText: {
-        type: String,
-        default: 'Photo',
-    },
+    // altText: {
+    //     type: String,
+    //     default: 'Photo',
+    // },
     url: {
         type: String,
         // required: true,
         // default: 'imgur.com'
     },
-    // albumId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Album',
-    // },
     creator: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',

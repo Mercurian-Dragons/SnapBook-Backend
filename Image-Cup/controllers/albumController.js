@@ -4,8 +4,8 @@ const Album = require('../models/album')
 
 // INDEX all albums
 // GET /albums
-// working 
-router.get('/', async (req, res, next) => {
+// view all albums
+router.get('/albums', async (req, res, next) => {
     try {
         const albums = await Album.find({})
         res.json(albums)
@@ -16,8 +16,11 @@ router.get('/', async (req, res, next) => {
 
 // SHOW
 // GET /album/:id
-// working
-router.get('/:id', (req, res, next) => {
+// view a specific album
+// (some sample album IDs for testing:)
+// 62ec63279e30df4a9bf74286 (cat gifs)
+// 62eea95e1e41f377e0590e0e (cute animal pics)
+router.get('/album/:id', (req, res, next) => {
 	const id = req.params.id;
 	Album.findById(id).populate('photos')
 		.then((album) => res.json(album))
@@ -26,8 +29,8 @@ router.get('/:id', (req, res, next) => {
 
 // CREATE
 // POST /album/
-// working
-router.post('/', (req, res, next) => {
+// create a new album
+router.post('/album/create', (req, res, next) => {
 	const albumData = req.body;
 	Album.create(albumData)
 		.then((album) => res.status(201).json(album))
@@ -36,8 +39,8 @@ router.post('/', (req, res, next) => {
 
 // UPDATE
 // PATCH /album/:id
-// working
-router.patch('/:id', (req, res, next) => {
+// edit an album's info
+router.patch('/album/edit/:id', (req, res, next) => {
 	const id = req.params.id;
 	const albumData = req.body;
 	Album.findOneAndUpdate({ _id: id }, albumData, { new: true })
@@ -47,8 +50,8 @@ router.patch('/:id', (req, res, next) => {
 
 // DESTROY
 // DELETE /album/:id
-// working
-router.delete('/:id', (req, res, next) => {
+// delete an album
+router.delete('/album/edit/:id', (req, res, next) => {
 	const id = req.params.id;
 	Album.findOneAndDelete({ _id: id })
 		.then(() => res.sendStatus(204))

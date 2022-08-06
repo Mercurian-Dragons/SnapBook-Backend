@@ -6,7 +6,7 @@ const Album = require('../models/album')
 // INDEX
 // GET /photo/
 // get all photos for an album
-router.get('/:albumId', async (req, res, next) => {
+router.get('/:albumId/photos', async (req, res, next) => {
     try {
       // find the album first
         const album = await Album.findById(
@@ -25,8 +25,8 @@ router.get('/:albumId', async (req, res, next) => {
 })
 
 // SHOW
-// get one photo
-// GET /photo/:albumId/photoId
+// GET /
+// view a photo within an album
 router.get('/:albumId/:photoId', (req, res, next) => {
     Album.findById(req.params.albumId)
         .populate('photos')
@@ -49,9 +49,9 @@ router.get('/:albumId/:photoId', (req, res, next) => {
 
 // CREATE
 // POST /photo/
-// localhost:8000/photo/albumID
-// posting a photo TO AN ALBUM
-router.post('/:albumId', (req, res, next) => {
+// creating a photo within an album
+// localhost:8000/albumId/photos/new
+router.post('/:albumId/upload', (req, res, next) => {
     Album.findById(req.params.albumId)
         .then((album) => {
 
@@ -68,8 +68,10 @@ router.post('/:albumId', (req, res, next) => {
 
 // UPDATE
 // PATCH /photo
+// edit photo information
 // localhost:8000/photo/photoId
-router.patch('/:id', (req, res, next) => {
+
+router.patch('/:photoId/edit', (req, res, next) => {
     const id = req.params.id
     const photoData = req.body
 
@@ -87,8 +89,9 @@ router.patch('/:id', (req, res, next) => {
 
 // DESTROY
 // DELETE: /photo
+// delete a photo
 // localhost:8000/photo/albumID/photoId
-router.delete('/:albumId/:photoId', (req, res, next) => {
+router.delete('/:photoId/edit', (req, res, next) => {
     Album.findById(req.params.albumId)
     .then((album) => {
         if (album) {

@@ -4,7 +4,7 @@ const User = require('./users')
 
 const albumSchema = new mongoose.Schema({
     id: Number,
-    albumName:{
+    name:{
         type: String,
         required: true,
         default: 'My Album'
@@ -13,7 +13,7 @@ const albumSchema = new mongoose.Schema({
     url: {
         type: String,
         // required: true,
-        // needs to be e.g. localhost:8000/albums/:id
+        // needs to be e.g. localhost:8000/album/:id
     },
     photos: [photoSchema],
     creator: {

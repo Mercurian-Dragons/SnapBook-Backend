@@ -4,8 +4,8 @@ const User = require('../models/users')
 
 // INDEX all users
 // GET /user
-// unlikely to need this but, but making anyways
-router.get('/', async (req, res, next) => {
+// (may not need this but, but making anyways)
+router.get('/users', async (req, res, next) => {
     try {
         const users = await User.find({})
         res.json(users)
@@ -17,8 +17,8 @@ router.get('/', async (req, res, next) => {
 // SHOW
 // GET /user/:id
 // see a specific user's info 
-// unlikely to need this unless we get far into stretch goals, but making anyways
-router.get('/:id', (req, res, next) => {
+// (may not need this, but making anyways)
+router.get('user/:id', (req, res, next) => {
 	const id = req.params.id;
 	User.findById(id)
 		.then((user) => res.json(user))
@@ -28,7 +28,7 @@ router.get('/:id', (req, res, next) => {
 // CREATE
 // POST /user/
 // create a new user 
-router.post('/', (req, res, next) => {
+router.post('user/new', (req, res, next) => {
 	const userData = req.body;
 	User.create(userData)
 		.then((user) => res.status(201).json(user))
@@ -38,7 +38,7 @@ router.post('/', (req, res, next) => {
 // UPDATE
 // PATCH /user/:id
 // edit user info
-router.patch('/:id', (req, res, next) => {
+router.patch('user/edit/:id', (req, res, next) => {
 	const id = req.params.id;
 	const userData = req.body;
 	User.findOneAndUpdate({ _id: id }, userData, { new: true })

@@ -4,12 +4,12 @@ const User = require('./users')
 
 const photoSchema = new mongoose.Schema({
     id: Number,
-    filename: {
+    name: {
         type: String,
         required: true,
         default: 'My Photo',
     },
-    caption: String,
+    description: String,
     altText: {
         type: String,
         default: 'Photo',
@@ -23,12 +23,12 @@ const photoSchema = new mongoose.Schema({
     //     type: mongoose.Schema.Types.ObjectId,
     //     ref: 'Album',
     // },
-    uploader: {
+    creator: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
-    // deleted: true,
     fileType: String,
+    // deleted: true,
     // favorite: Boolean,
     // tags: [{}],
     },

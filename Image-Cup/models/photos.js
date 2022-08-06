@@ -1,5 +1,6 @@
 const mongoose = require('../db/connection')
 // const Album = require('./album')
+const User = require('./users')
 
 const photoSchema = new mongoose.Schema({
     id: Number,
@@ -22,11 +23,10 @@ const photoSchema = new mongoose.Schema({
     //     type: mongoose.Schema.Types.ObjectId,
     //     ref: 'Album',
     // },
-    // uploader: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'User',
-    //     required: true,
-    // },
+    uploader: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    },
     // deleted: true,
     fileType: String,
     // favorite: Boolean,

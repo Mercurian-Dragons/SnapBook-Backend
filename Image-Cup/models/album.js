@@ -1,5 +1,6 @@
 const mongoose = require('../db/connection')
 const photoSchema = require ('../models/photos')
+const User = require('./users')
 
 const albumSchema = new mongoose.Schema({
     id: Number,

@@ -3,7 +3,8 @@ const router = express.Router()
 const User = require('../models/users')
 
 // INDEX all users
-// GET /user
+// GET /users
+// localhost:8000/users
 // (may not need this but, but making anyways)
 router.get('/users', async (req, res, next) => {
     try {
@@ -16,6 +17,7 @@ router.get('/users', async (req, res, next) => {
 
 // SHOW
 // GET /user/:id
+// localhost:8000/user/:id
 // see a specific user's info 
 // (may not need this, but making anyways)
 router.get('user/:id', (req, res, next) => {
@@ -27,6 +29,7 @@ router.get('user/:id', (req, res, next) => {
 
 // CREATE
 // POST /user/
+// localhost:8000/user/new
 // create a new user 
 router.post('user/new', (req, res, next) => {
 	const userData = req.body;

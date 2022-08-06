@@ -5,13 +5,15 @@ const Album = require('../models/album')
 
 // INDEX
 // GET /photo/
+//localhost:8000/:albumId/photos
 // get all photos for an album
 router.get('/:albumId/photos', async (req, res, next) => {
     try {
       // find the album first
         const album = await Album.findById(
         req.params.albumId
-        ).populate('photos')
+        ).populate('photos.creator')
+        // ^ displays actual name of the photo's creator, rather than only ID
         if (album) {
         // respond with all of the photos for that album
         res.json(album.photos)
@@ -26,10 +28,12 @@ router.get('/:albumId/photos', async (req, res, next) => {
 
 // SHOW
 // GET /
+//localhost:8000/:albumId/:photoId
 // view a photo within an album
 router.get('/:albumId/:photoId', (req, res, next) => {
     Album.findById(req.params.albumId)
-        .populate('photos')
+        .populate('photos.creator')
+        // ^ displays actual name of the photo's creator, rather than only the ID
         .then((album) => {
         if (album) {
             const foundPhoto = album.photos.find(photo => photo._id.toString() === req.params.photoId)
@@ -50,7 +54,7 @@ router.get('/:albumId/:photoId', (req, res, next) => {
 // CREATE
 // POST /photo/
 // creating a photo within an album
-// localhost:8000/albumId/photos/new
+// localhost:8000/:albumId/upload
 router.post('/:albumId/upload', (req, res, next) => {
     Album.findById(req.params.albumId)
         .then((album) => {
@@ -69,8 +73,8 @@ router.post('/:albumId/upload', (req, res, next) => {
 // UPDATE
 // PATCH /photo
 // edit photo information
-// localhost:8000/photo/photoId
-
+// localhost:8000/:photoId/edit
+// HAVING ISSUES, 
 router.patch('/:photoId/edit', (req, res, next) => {
     const id = req.params.id
     const photoData = req.body
@@ -90,7 +94,7 @@ router.patch('/:photoId/edit', (req, res, next) => {
 // DESTROY
 // DELETE: /photo
 // delete a photo
-// localhost:8000/photo/albumID/photoId
+// localhost:8000/:photoId/edit
 router.delete('/:photoId/edit', (req, res, next) => {
     Album.findById(req.params.albumId)
     .then((album) => {

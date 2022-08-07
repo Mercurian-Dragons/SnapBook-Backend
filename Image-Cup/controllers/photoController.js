@@ -3,10 +3,14 @@ const router = express.Router()
 const Photo = require('../models/photos')
 const Album = require('../models/album')
 
-// INDEX
+// (some sample album IDs for testing:)
+// 62eea95e1e41f377e0590e0e (cute animal pics)
+// 62ed7975d9ebd701018ca344 (memes)
+// 62eef7b6c906319085e8c902 (test)
+
+// INDEX - get all photos for an album
 // GET /photo/
 //localhost:8000/:albumId/photos
-// get all photos for an album
 router.get('/:albumId/photos', async (req, res, next) => {
     try {
       // find the album first
@@ -51,18 +55,14 @@ router.get('/:albumId/:photoId', (req, res, next) => {
     .catch(next)
 })
 
-// CREATE
+// CREATE - a photo within an album
 // POST /photo/
-// creating a photo within an album
 // localhost:8000/:albumId/upload
 router.post('/:albumId/upload', (req, res, next) => {
     Album.findById(req.params.albumId)
         .then((album) => {
-
         album.photos.push(req.body)
-
         return album.save()
-        // res.status(201).json(restaurant.save())
     })
     .then((album) => {
         res.status(201).json(album)
@@ -70,11 +70,10 @@ router.post('/:albumId/upload', (req, res, next) => {
     .catch(next)
 })
 
-// UPDATE
+// UPDATE - photo information
 // PATCH /photo
-// edit photo information
 // localhost:8000/:photoId/edit
-// HAVING ISSUES, 
+//  -> HAVING ISSUES 
 router.patch('/:photoId/edit', (req, res, next) => {
     const id = req.params.id
     const photoData = req.body
@@ -89,11 +88,10 @@ router.patch('/:photoId/edit', (req, res, next) => {
         })
         .then(() => res.sendStatus(204))
         .catch(next)
-  })
+})
 
-// DESTROY
+// DESTROY - a photo
 // DELETE: /photo
-// delete a photo
 // localhost:8000/:photoId/edit
 router.delete('/:photoId/edit', (req, res, next) => {
     Album.findById(req.params.albumId)
@@ -102,14 +100,11 @@ router.delete('/:photoId/edit', (req, res, next) => {
             album.photos.id(req.params.photoId).remove();
             album.save()
             res.sendStatus(204)
-          // } else {
-          //   res.sendStatus(404)
-          // }
         } else {
           // if you can't find it, send a 404
             res.sendStatus(404)
         }
-        })
+    })
         .catch(next)
 })
 

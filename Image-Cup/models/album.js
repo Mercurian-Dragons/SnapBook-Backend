@@ -15,12 +15,11 @@ const albumSchema = new mongoose.Schema({
         // required: true,
         // needs to be e.g. localhost:8000/album/:id
     },
-    photos: [photoSchema],
     creator: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
-    
+    photos: [photoSchema],
     // private: Boolean,
     // tags: []
     },

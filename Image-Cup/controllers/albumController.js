@@ -2,10 +2,14 @@ const express = require ('express')
 const router = express.Router()
 const Album = require('../models/album')
 
-// INDEX all albums
-// GET /albums
+// (some sample album IDs for testing:)
+// 62eea95e1e41f377e0590e0e (cute animal pics)
+// 62ed7975d9ebd701018ca344 (memes)
+// 62eef7b6c906319085e8c902 (test)
+
+// INDEX - view all albums
+// GET
 // localhost:8000/albums
-// view all albums
 router.get('/albums', async (req, res, next) => {
     try {
         const albums = await Album.find({})
@@ -18,12 +22,10 @@ router.get('/albums', async (req, res, next) => {
     }
 })
 
-// SHOW
+// SHOW -  view a specific album
 // GET /album/:id
-// view a specific album
 // localhost:8000/album/:id
-// (some sample album IDs for testing:)
-// 62eea95e1e41f377e0590e0e (cute animal pics)
+
 router.get('/album/:id', (req, res, next) => {
 	const id = req.params.id;
 	Album.findById(id).populate('photos')
@@ -34,20 +36,19 @@ router.get('/album/:id', (req, res, next) => {
 		.catch(next);
 });
 
-// CREATE
+// CREATE - new album
 // POST /album/
 // localhost:8000/album/create
-// create a new album
 router.post('/album/create', (req, res, next) => {
 	const albumData = req.body;
 	Album.create(albumData)
+	// .populate('creator')
 		.then((album) => res.status(201).json(album))
 		.catch(next);
 });
 
-// UPDATE
+// UPDATE - an album's info
 // PATCH /album/:id
-// edit an album's info
 // localhost:8000/album/edit/:id
 router.patch('/album/edit/:id', (req, res, next) => {
 	const id = req.params.id;
@@ -58,9 +59,8 @@ router.patch('/album/edit/:id', (req, res, next) => {
 		.catch(next);
 });
 
-// DESTROY
+// DESTROY - an album
 // DELETE /album/:id
-// delete an album
 // localhost:8000/album/edit/:id
 router.delete('/album/edit/:id', (req, res, next) => {
 	const id = req.params.id;
@@ -71,4 +71,3 @@ router.delete('/album/edit/:id', (req, res, next) => {
 });
 
 module.exports = router
-

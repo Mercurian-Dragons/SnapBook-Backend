@@ -1,4 +1,5 @@
 const mongoose = require('../db/connection')
+const albumSchema = require('../models/album')
 
 const UserSchema = new mongoose.Schema({
     id: Number,
@@ -7,6 +8,10 @@ const UserSchema = new mongoose.Schema({
         required: true,
         // unique: true,
     },
+    albums: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Album',
+    }],
     // password: {
     //     type: String,
     //     required: true,

@@ -1,6 +1,7 @@
 const express = require ('express')
 const router = express.Router()
 const Album = require('../models/album')
+const User = require('../models/users')
 
 // (some sample album IDs for testing:)
 // 62eea95e1e41f377e0590e0e (cute animal pics)

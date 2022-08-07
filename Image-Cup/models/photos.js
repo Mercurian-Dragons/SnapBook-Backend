@@ -1,6 +1,6 @@
 const mongoose = require('../db/connection')
-// const Album = require('./album')
-const User = require('./users')
+const Album = require('../models/album')
+const userSchema = require('../models/users')
 
 const photoSchema = new mongoose.Schema({
     id: Number,
@@ -19,11 +19,15 @@ const photoSchema = new mongoose.Schema({
         // required: true,
         // default: 'imgur.com'
     },
+    album: {
+        type:mongoose.Schema.Types.ObjectId,
+        ref: 'Album'
+        // required: true
+    },
     creator: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
-    fileType: String,
     // deleted: true,
     // favorite: Boolean,
     // tags: [{}],

@@ -16,18 +16,19 @@ router.get('/', async (req, res, next) => {
 })
 
 // SHOW - a specific user
-// GET /user/:id
-// localhost:8000/user/:id
+// GET /users//:id
+// FOR SOME REASON ONLY WORKS WITH TWO // ??
+// localhost:8000/users//:id
 router.get('/:id', (req, res, next) => {
-	const id = req.params.id;
-	User.findById(id)
+	// const id = req.params.id;
+	User.findById(req.params.id)
 		.then((user) => res.json(user))
 		.catch(next);
 });
 
 // CREATE -  a new user 
-// POST /user/
-// localhost:8000/user/new
+// POST /users/
+// localhost:8000/users
 router.post('/', (req, res, next) => {
 	const userData = req.body;
 	User.create(userData)
@@ -36,19 +37,18 @@ router.post('/', (req, res, next) => {
 });
 
 // UPDATE
-// PATCH /user/:id
+// PATCH /users/:id
 // edit user info
 router.patch('/edit/:id', (req, res, next) => {
-	const id = req.params.id;
 	const userData = req.body;
-	User.findOneAndUpdate({ _id: id }, userData, { new: true })
+	User.findOneAndUpdate(req.params.id, userData, { new: true })
 		.then((user) => res.json(user))
 		.catch(next);
 });
 
 // DESTROY - a user
-// DELETE /user/:id
-// localhost:8000/user/edit/:id
+// DELETE /users/:id
+// localhost:8000/users/edit/:id
 router.delete('/edit/:id', (req, res, next) => {
 	const id = req.params.id;
 	User.findOneAndDelete({ _id: id })

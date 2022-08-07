@@ -24,7 +24,7 @@ app.use('/', photoController)
 
 const usersController = require('./controllers/usersController')
 const User = require('./models/users')
-app.use('/user', usersController)
+app.use('/users', usersController)
 
 app.listen(app.get('port'), () => {
     console.log('on port: ' + app.get('port'))

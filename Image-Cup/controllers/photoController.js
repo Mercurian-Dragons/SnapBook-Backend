@@ -2,6 +2,7 @@ const express = require ('express')
 const router = express.Router()
 const Photo = require('../models/photos')
 const Album = require('../models/album')
+const User = require('../models/users')
 
 // (some sample album IDs for testing:)
 // 62eea95e1e41f377e0590e0e (cute animal pics)
@@ -35,8 +36,8 @@ router.get('/:albumId/photos', async (req, res, next) => {
 //localhost:8000/:albumId/:photoId
 // view a photo within an album
 router.get('/:albumId/:photoId', (req, res, next) => {
-    Album.findById(req.params.albumId)
-        .populate('photos.creator')
+    Album.findById(req.params.id)
+        // .populate('photos.creator')
         // ^ displays actual name of the photo's creator, rather than only the ID
         .then((album) => {
         if (album) {
@@ -70,6 +71,9 @@ router.post('/:albumId/upload', (req, res, next) => {
     .catch(next)
 })
 
+// User.findById(req.params.userId)
+// User.albums.push(req.body)
+
 // UPDATE - photo information
 // PATCH /photo
 // localhost:8000/:photoId/edit
@@ -77,17 +81,21 @@ router.post('/:albumId/upload', (req, res, next) => {
 router.patch('/:photoId/edit', (req, res, next) => {
     const id = req.params.id
     const photoData = req.body
+    Album.findOneAndUpdate({ 'photos_id': id }, photoData, { new: true })
+    .populate('creator')
+    .then((photo) => res.json(photo))
+    .catch(next);
+    // Album.findOne({
+    //     'photos._id': id,
+    // })
+    //     .then((album) => {
+    //         const review = album.photos.id(id)
+    //         review.set(photoData)
+    //         return album.save()
+    //     })
+    //     .then(() => res.sendStatus(204))
+    //     .catch(next)
 
-    Album.findOne({
-        'photos._id': id,
-    })
-        .then((album) => {
-            const review = album.photos.id(id)
-            review.set(photoData)
-            return album.save()
-        })
-        .then(() => res.sendStatus(204))
-        .catch(next)
 })
 
 // DESTROY - a photo

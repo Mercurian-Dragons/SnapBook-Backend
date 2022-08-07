@@ -109,4 +109,3 @@ router.delete('/:photoId/edit', (req, res, next) => {
 })
 
 module.exports = router
-

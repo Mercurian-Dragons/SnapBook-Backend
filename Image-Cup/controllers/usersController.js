@@ -2,10 +2,11 @@ const express = require ('express')
 const router = express.Router()
 const User = require('../models/users')
 
+	
 // INDEX - all users
 // GET /users
 // localhost:8000/users
-router.get('/users', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
         const users = await User.find({})
         res.json(users)
@@ -14,11 +15,10 @@ router.get('/users', async (req, res, next) => {
     }
 })
 
-
 // SHOW - a specific user
 // GET /user/:id
 // localhost:8000/user/:id
-router.get('user/:id', (req, res, next) => {
+router.get('/:id', (req, res, next) => {
 	const id = req.params.id;
 	User.findById(id)
 		.then((user) => res.json(user))
@@ -28,16 +28,17 @@ router.get('user/:id', (req, res, next) => {
 // CREATE -  a new user 
 // POST /user/
 // localhost:8000/user/new
-router.post('/new', (req, res, next) => {
+router.post('/', (req, res, next) => {
 	const userData = req.body;
 	User.create(userData)
 		.then((user) => res.status(201).json(user))
 		.catch(next);
 });
 
-// UPDATE - user info
+// UPDATE
 // PATCH /user/:id
-router.patch('user/edit/:id', (req, res, next) => {
+// edit user info
+router.patch('/edit/:id', (req, res, next) => {
 	const id = req.params.id;
 	const userData = req.body;
 	User.findOneAndUpdate({ _id: id }, userData, { new: true })
@@ -48,7 +49,7 @@ router.patch('user/edit/:id', (req, res, next) => {
 // DESTROY - a user
 // DELETE /user/:id
 // localhost:8000/user/edit/:id
-router.delete('/user/edit/:id', (req, res, next) => {
+router.delete('/edit/:id', (req, res, next) => {
 	const id = req.params.id;
 	User.findOneAndDelete({ _id: id })
 		.then(() => res.sendStatus(204))

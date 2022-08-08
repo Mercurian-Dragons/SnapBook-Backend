@@ -10,13 +10,12 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cors())
 
-app.get('/', (req,res) => {
-    res.redirect('/')
-})
+// app.get('/', (req,res) => {
+//     res.redirect('/')
+// })
 
 const albumController = require('./controllers/albumController')
 const Album = require('./models/album')
-
 app.use('/', albumController)
 
 const photoController = require('./controllers/photoController')

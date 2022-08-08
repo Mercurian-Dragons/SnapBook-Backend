@@ -1,34 +1,35 @@
 const mongoose = require('../db/connection')
-// const Album = require('./album')
+
+const Album = require('../models/album')
+const userSchema = require('../models/users')
 
 const photoSchema = new mongoose.Schema({
     id: Number,
-    filename: {
+    name: {
         type: String,
         required: true,
         default: 'My Photo',
     },
-    caption: String,
-    altText: {
-        type: String,
-        default: 'Photo',
-    },
+    description: String,
+    // altText: {
+    //     type: String,
+    //     default: 'Photo',
+    // },
     url: {
         type: String,
         // required: true,
         // default: 'imgur.com'
     },
-    // albumId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Album',
-    // },
-    // uploader: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'User',
-    //     required: true,
-    // },
+    album: {
+        type:mongoose.Schema.Types.ObjectId,
+        ref: 'Album'
+        // required: true
+    },
+    creator: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    },
     // deleted: true,
-    fileType: String,
     // favorite: Boolean,
     // tags: [{}],
     },

@@ -20,7 +20,7 @@ const Album = require('./models/album')
 app.use('/', albumController)
 
 const photoController = require('./controllers/photoController')
-const Photo = require('./models/Photos')
+const Photo = require('./models/photos')
 app.use('/', photoController)
 
 const usersController = require('./controllers/usersController')

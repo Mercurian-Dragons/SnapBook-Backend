@@ -16,6 +16,7 @@ app.get('/', (req,res) => {
 
 const albumController = require('./controllers/albumController')
 const Album = require('./models/album')
+
 app.use('/', albumController)
 
 const photoController = require('./controllers/photoController')
@@ -25,6 +26,7 @@ app.use('/', photoController)
 const usersController = require('./controllers/usersController')
 const User = require('./models/users')
 app.use('/users', usersController)
+
 
 app.listen(app.get('port'), () => {
     console.log('on port: ' + app.get('port'))

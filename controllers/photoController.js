@@ -2,6 +2,7 @@ const express = require ('express')
 const router = express.Router()
 const Photo = require('../models/photos')
 const Album = require('../models/album')
+
 const User = require('../models/users')
 
 // (some sample album IDs for testing:)
@@ -13,6 +14,7 @@ const User = require('../models/users')
 // GET /photo/
 //localhost:8000/:albumId/photos
 router.get('/:albumId/photos', async (req, res, next) => {
+
     try {
       // find the album first
         const album = await Album.findById(
@@ -56,6 +58,7 @@ router.get('/:albumId/:photoId', (req, res, next) => {
     .catch(next)
 })
 
+
 // CREATE - a photo within an album
 // POST /photo/
 // localhost:8000/:albumId/upload
@@ -70,6 +73,7 @@ router.post('/:albumId/upload', (req, res, next) => {
     })
     .catch(next)
 })
+
 
 // User.findById(req.params.userId)
 // User.albums.push(req.body)

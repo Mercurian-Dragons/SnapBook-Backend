@@ -1,4 +1,5 @@
 const mongoose = require('../db/connection')
+
 const Album = require('../models/album')
 const userSchema = require('../models/users')
 

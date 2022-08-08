@@ -1,6 +1,7 @@
 const express = require ('express')
 const router = express.Router()
 const Album = require('../models/album')
+
 const User = require('../models/users')
 
 // (some sample album IDs for testing:)
@@ -33,6 +34,7 @@ router.get('/album/:id', (req, res, next) => {
 	.populate('creator')
 	.populate('photos.creator')
 	// ^ displays actual name of the photo's creator, rather than only the ID
+
 		.then((album) => res.json(album))
 		.catch(next);
 });
@@ -44,9 +46,11 @@ router.post('/album/create', (req, res, next) => {
 	const albumData = req.body;
 	Album.create(albumData)
 	// .populate('creator')
+
 		.then((album) => res.status(201).json(album))
 		.catch(next);
 });
+
 
 // UPDATE - an album's info
 // PATCH /album/:id
@@ -60,6 +64,7 @@ router.patch('/album/edit/:id', (req, res, next) => {
 		.catch(next);
 });
 
+
 // DESTROY - an album
 // DELETE /album/:id
 // localhost:8000/album/edit/:id
@@ -67,8 +72,10 @@ router.delete('/album/edit/:id', (req, res, next) => {
 	const id = req.params.id;
 	Album.findOneAndDelete({ _id: id })
 	.populate('creator')
+
 		.then(() => res.sendStatus(204))
 		.catch(next);
 });
+
 
 module.exports = router

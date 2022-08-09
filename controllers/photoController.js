@@ -2,7 +2,6 @@ const express = require ('express')
 const router = express.Router()
 const Photo = require('../models/photos')
 const Album = require('../models/album')
-
 const User = require('../models/users')
 
 // (some sample album IDs for testing:)
@@ -67,6 +66,7 @@ router.post('/:albumId/upload', (req, res, next) => {
         .then((album) => {
         album.photos.push(req.body)
         return album.save()
+       
     })
     .then((album) => {
         res.status(201).json(album)
@@ -105,7 +105,7 @@ router.patch('/:photoId/edit', (req, res, next) => {
 // DESTROY - a photo
 // DELETE: /photo
 // localhost:8000/:photoId/edit
-router.delete('/:photoId/edit', (req, res, next) => {
+router.delete('/:albumId/:photoId/', (req, res, next) => {
     Album.findById(req.params.albumId)
     .then((album) => {
         if (album) {

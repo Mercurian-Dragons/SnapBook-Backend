@@ -5,7 +5,7 @@ const User = require('../models/users')
 
 const albumSchema = new mongoose.Schema({
     id: Number,
-    name:{
+    albumName:{
         type: String,
         required: true,
         default: 'My Album'

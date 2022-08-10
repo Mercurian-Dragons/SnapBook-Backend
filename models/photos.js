@@ -7,7 +7,7 @@ const photoSchema = new mongoose.Schema({
     id: Number,
     name: {
         type: String,
-        required: true,
+        // required: true,
         default: 'My Photo',
     },
     description: String,

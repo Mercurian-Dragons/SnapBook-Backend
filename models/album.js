@@ -17,8 +17,9 @@ const albumSchema = new mongoose.Schema({
         // needs to be e.g. localhost:8000/album/:id
     },
     creator: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        type: String,
+        // type: mongoose.Schema.Types.ObjectId,
+        // ref: 'User',
     },
     photos: [photoSchema],
     // private: Boolean,

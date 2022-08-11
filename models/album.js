@@ -7,7 +7,7 @@ const albumSchema = new mongoose.Schema({
     id: Number,
     albumName:{
         type: String,
-        required: true,
+        // required: true,
         default: 'My Album'
     },
     description: String,
@@ -17,8 +17,9 @@ const albumSchema = new mongoose.Schema({
         // needs to be e.g. localhost:8000/album/:id
     },
     creator: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        type: String,
+        // type: mongoose.Schema.Types.ObjectId,
+        // ref: 'User',
     },
     photos: [photoSchema],
     // private: Boolean,

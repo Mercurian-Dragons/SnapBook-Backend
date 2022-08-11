@@ -16,10 +16,10 @@ Note: You must also fork and clone [this repository](https://github.com/Mercuria
 
 2. Run the following code in your terminal to install the required dependencies:
 
->  `npm install axios cors express mongoose nodemon`
+>  `npm install`
 
 3.  Once installation is complete, and you've also completed installation steps for the [other repository](https://github.com/Mercurian-Dragons/SnapBook-FrontEnd) run the following code in your terminal:
 
->  `nodemon app.js`
+>  `node app.js`
 
 5. Congrats! The app can now be viewed on [http://localhost:3000](http://localhost:3000)!

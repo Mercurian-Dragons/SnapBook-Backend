@@ -11,7 +11,7 @@ app.use(express.urlencoded({extended:true}))
 app.use(cors())
 
 // app.get('/', (req,res) => {
-//     res.redirect('/')
+//     res.redirect('/albums')
 // })
 
 const albumController = require('./controllers/albumController')

@@ -7,7 +7,7 @@ const albumSchema = new mongoose.Schema({
     id: Number,
     albumName:{
         type: String,
-        required: true,
+        // required: true,
         default: 'My Album'
     },
     description: String,
